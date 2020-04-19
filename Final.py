@@ -5,20 +5,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
-i = 0
 
 def GetData():
-    global i
     price = driver.find_elements(By.XPATH, "//div[@class='sell-value']")
     size = driver.find_elements(By.XPATH, "/html/body/div/div/div/div[1]/div[3]/div[2]/div[3]/div/a/div/div[2]/div/div[2]/div[1]/div/div/span[1]")
         
     for m, p in zip(size, price):
-        i += 1
         gheymat = price_to_float(p.text)
         metraj = int(m.text)
         cursor.execute(save_data, (metraj, gheymat))
         cnx.commit()
-        print(i)
 
 
 @contextlib.contextmanager
